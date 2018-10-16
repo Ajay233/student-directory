@@ -28,8 +28,8 @@ end
 def print(names)
   # Now prints a number before the name of each student
   names.each_with_index do |names, index|  
-    # Now only prints names beginning with "D"
-    if names[:name].starts_with?("D")
+    # Now only prints names beginning with "D" & containing less than 12 letters
+    if names[:name].start_with?("D") && names[:name].length < 12
       puts "#{index + 1}.#{names[:name]} (#{names[:cohort]} cohort)"
     end
   end
