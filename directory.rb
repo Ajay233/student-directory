@@ -23,10 +23,11 @@ end
 def print_header
   puts "The students of Villain Academy"
   puts "-------------------------------"
-end 
+end
 
 def print(names)
-  names.each { |names| puts "#{names[:name]} (#{names[:cohort]} cohort)" }
+  # Now prints a number before the name of each student
+  names.each_with_index { |names, index| puts "#{index + 1}.#{names[:name]} (#{names[:cohort]} cohort)" }
 end
 
 def print_footer(names)
