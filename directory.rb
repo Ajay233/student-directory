@@ -26,12 +26,16 @@ def print_header
 end
 
 def print(names)
+  i = 0
+  length = names.length - 1
+  # "Each" changed to an until loop
+  until i >= length
   # Now prints a number before the name of each student
-  names.each_with_index do |names, index|  
     # Now only prints names beginning with "D" & containing less than 12 letters
-    if names[:name].start_with?("D") && names[:name].length < 12
-      puts "#{index + 1}.#{names[:name]} (#{names[:cohort]} cohort)"
+    if names[i][:name].start_with?("D") && names[i][:name].length < 12
+      puts "#{i + 1}.#{names[i][:name]} (#{names[i][:cohort]} cohort)"
     end
+  i += 1  
   end
 end
 
