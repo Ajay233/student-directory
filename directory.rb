@@ -1,5 +1,17 @@
-# lets put all the students into an array
+# This method provides a default value of "TBC" if a blank string is entered
+def default(input)
+  input.map! do |hash|
+    hash.each do |key, val|
+      if hash[key] == :""
+        hash[key] = :TBC
+      elsif hash[key].empty?
+        hash[key] = "TBC"
+      end
+    end
+  end
+end
 
+# Put all the students into an array
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -9,11 +21,13 @@ def input_students
   name = gets.chomp.capitalize
   # while name is not empty repeat this code
   while !name.empty?
-  # Get details of age, height, town, country, department, requirements
+  # Get details of age, height, town, country, department, requirements etc
+    puts "Please enter the cohort month"
+    cohort = gets.chomp.capitalize.to_sym
     puts "Please enter thier age"
     age = gets.chomp
     puts "Please enter height in metres"
-    height = gets.chomp + " m"
+    height = gets.chomp
     puts "Please enter thier home town"
     town = gets.chomp.capitalize
     puts "Please enter thier country of birth"
@@ -28,9 +42,9 @@ def input_students
     # add the student details to the hash array
     students << {name: name, age: age, height: height, home_town: town,
                  country_of_birth: country, gov_dept: dept,
-                 specialist_requirements: requirements,
-                 hobbies: hobbies, cohort: :november}
-    
+                 requirements: requirements, hobbies: hobbies, cohort: cohort}
+    # catches any empty values and assigns "TBC" as the default value
+    default(students)
     puts "We now have #{students.count} students"
     # get another name from the user
     name = gets.chomp.capitalize
@@ -56,7 +70,7 @@ def print(names)
       puts "Age: #{names[i][:age]}".center(160)
       puts "Height: #{names[i][:height]} m".center(160)
       puts "Home Town: #{names[i][:home_town]}".center(160)
-      puts "Birth Country: #{names[i][:country]}".center(160)
+      puts "Birth Country: #{names[i][:country_of_birth]}".center(160)
       puts "Government Department: #{names[i][:gov_dept]}".center(160)
       puts "Special Requirements: #{names[i][:requirements]}".center(160)
       puts "Hobbies: #{names[i][:hobbies]}".center(160)
