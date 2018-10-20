@@ -74,23 +74,34 @@ def print_header
 end
 
 def print(names)
-  i = 0
-  # "Each" changed to an until loop
-  until i >= names.length
-  # Now prints a number before the name of each student
-    # Now only prints names beginning with "D" & containing less than 12 letters
-    if names[i][:name].start_with?("D") && names[i][:name].length < 12
-      puts "#{i + 1}.Name: #{names[i][:name]} (#{names[i][:cohort]} cohort)".center(160)
-      puts "Age: #{names[i][:age]}".center(160)
-      puts "Height: #{names[i][:height]} m".center(160)
-      puts "Home Town: #{names[i][:home_town]}".center(160)
-      puts "Birth Country: #{names[i][:country_of_birth]}".center(160)
-      puts "Government Department: #{names[i][:gov_dept]}".center(160)
-      puts "Special Requirements: #{names[i][:requirements]}".center(160)
-      puts "Hobbies: #{names[i][:hobbies]}".center(160)
-      puts
+  # Create a list of all cohorts that have been entered
+  cohorts = []
+  names.each { |hash| cohorts << hash[:cohort] }
+  cohorts.uniq!
+  x = 0
+  # Iterates through each cohort month in the cohorts array
+  while x < cohorts.length
+    puts "The #{cohorts[x]} cohort\n".center(160)
+    i = 0
+    # "Each" changed to an until loop
+    until i >= names.length
+    # Now prints a number before the name of each student
+      # Now only prints names beginning with "D" & containing less than 12 letters
+      if names[i][:name].start_with?("D") && names[i][:name].length < 12 && cohorts[x] == names[i][:cohort]
+        puts "#{i + 1}.Name: #{names[i][:name]} (#{names[i][:cohort]} cohort)".center(160)
+        puts "Age: #{names[i][:age]}".center(160)
+        puts "Height: #{names[i][:height]} m".center(160)
+        puts "Home Town: #{names[i][:home_town]}".center(160)
+        puts "Birth Country: #{names[i][:country_of_birth]}".center(160)
+        puts "Government Department: #{names[i][:gov_dept]}".center(160)
+        puts "Special Requirements: #{names[i][:requirements]}".center(160)
+        puts "Hobbies: #{names[i][:hobbies]}".center(160)
+        puts
+      end
+    i += 1  
     end
-  i += 1  
+  puts "-------------------------------".center(160)
+  x += 1
   end
 end
 
