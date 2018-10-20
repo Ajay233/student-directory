@@ -5,7 +5,7 @@ def cohort_validation(month)
             "December", ""]
   until checks.include?(month) == true
     puts "Please enter a valid month"
-    month = gets.chomp.capitalize
+    month = gets.delete!("\n").capitalize
   end
   month = "TBC" if month.empty?
   month.to_sym
@@ -31,27 +31,27 @@ def input_students
   # create an empty array
   students = []
   # get the first name
-  name = gets.chomp.capitalize
+  name = gets.delete!("\n").capitalize
   # while name is not empty repeat this code
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
     puts "Please enter the cohort month"
-    cohort = gets.chomp.capitalize
+    cohort = gets.delete!("\n").capitalize
     cohort = cohort_validation(cohort)
     puts "Please enter thier age"
-    age = gets.chomp
+    age = gets.delete!("\n")
     puts "Please enter height in metres"
-    height = gets.chomp
+    height = gets.delete!("\n")
     puts "Please enter thier home town"
-    town = gets.chomp.capitalize
+    town = gets.delete!("\n").capitalize
     puts "Please enter thier country of birth"
-    country = gets.chomp.capitalize
+    country = gets.delete!("\n").capitalize
     puts "Please enter which Government department they are from"
-    dept = gets.chomp.capitalize
+    dept = gets.delete!("\n").capitalize
     puts "Please enter any specialist requirements they have"
-    requirements = gets.chomp.capitalize
+    requirements = gets.delete!("\n").capitalize
     puts "Please enter any hobbies they have"
-    hobbies = gets.chomp.capitalize
+    hobbies = gets.delete!("\n").capitalize
     
     # add the student details to the hash array
     students << {name: name, age: age, height: height, home_town: town,
@@ -66,7 +66,7 @@ def input_students
       puts "We now have #{students.count} students"
     end
     # get another name from the user
-    name = gets.chomp.capitalize
+    name = gets.delete!("\n").capitalize
   end
   # return the array of students
   students
