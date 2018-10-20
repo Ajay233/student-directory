@@ -1,3 +1,16 @@
+# This method makes sure either a valid month or blank string is entered
+def cohort_validation(month)
+  checks = ["January", "February","March", "April", "May", "June",
+            "July", "August", "September", "October", "November",
+            "December", ""]
+  until checks.include?(month) == true
+    puts "Please enter a valid month"
+    month = gets.chomp.capitalize
+  end
+  month = "TBC" if month.empty?
+  month.to_sym
+end
+
 # This method provides a default value of "TBC" if a blank string is entered
 def default(input)
   input.map! do |hash|
@@ -23,7 +36,8 @@ def input_students
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
     puts "Please enter the cohort month"
-    cohort = gets.chomp.capitalize.to_sym
+    cohort = gets.chomp.capitalize
+    cohort = cohort_validation(cohort)
     puts "Please enter thier age"
     age = gets.chomp
     puts "Please enter height in metres"
