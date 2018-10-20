@@ -41,8 +41,8 @@ end
 
 # and then print them
 def print_header
-  puts "The students of Villain Academy"
-  puts "-------------------------------"
+  puts "The students of Villain Academy".center(160)
+  puts "-------------------------------".center(160)
 end
 
 def print(names)
@@ -52,21 +52,22 @@ def print(names)
   # Now prints a number before the name of each student
     # Now only prints names beginning with "D" & containing less than 12 letters
     if names[i][:name].start_with?("D") && names[i][:name].length < 12
-      puts "#{i + 1}.Name: #{names[i][:name]} (#{names[i][:cohort]} cohort)"
-      puts "Age: #{names[i][:age]}"
-      puts "Height: #{names[i][:height]} m"
-      puts "Home Town: #{names[i][:home_town]}"
-      puts "Birth Country: #{names[i][:country]}"
-      puts "Government Department: #{names[i][:gov_dept]}"
-      puts "Special Requirements: #{names[i][:requirements]}"
-      puts "Hobbies: #{names[i][:hobbies]}"
+      puts "#{i + 1}.Name: #{names[i][:name]} (#{names[i][:cohort]} cohort)".center(160)
+      puts "Age: #{names[i][:age]}".center(160)
+      puts "Height: #{names[i][:height]} m".center(160)
+      puts "Home Town: #{names[i][:home_town]}".center(160)
+      puts "Birth Country: #{names[i][:country]}".center(160)
+      puts "Government Department: #{names[i][:gov_dept]}".center(160)
+      puts "Special Requirements: #{names[i][:requirements]}".center(160)
+      puts "Hobbies: #{names[i][:hobbies]}".center(160)
+      puts
     end
   i += 1  
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(160)
 end
 
 # nothing happens until we call the methods
