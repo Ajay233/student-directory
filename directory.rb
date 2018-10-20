@@ -116,6 +116,9 @@ end
 
 # nothing happens until we call the methods
 students = input_students
-print_header
-print(students)
-print_footer(students)
+# Nothing will print unless there is at least 1 student added
+unless students.count == 0
+  print_header
+  print(students)
+  print_footer(students)
+end
