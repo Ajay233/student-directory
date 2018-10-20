@@ -59,7 +59,12 @@ def input_students
                  requirements: requirements, hobbies: hobbies, cohort: cohort}
     # catches any empty values and assigns "TBC" as the default value
     default(students)
-    puts "We now have #{students.count} students"
+    # Ensures the sentence reads correctly with student count
+    if students.count == 1
+      puts "We now have #{students.count} student"
+    else
+      puts "We now have #{students.count} students"
+    end
     # get another name from the user
     name = gets.chomp.capitalize
   end
