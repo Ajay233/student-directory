@@ -114,11 +114,27 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students".center(160)
 end
 
-# nothing happens until we call the methods
-students = input_students
-# Nothing will print unless there is at least 1 student added
-unless students.count == 0
-  print_header
-  print(students)
-  print_footer(students)
+def interactive_menu
+  students = []
+  loop do
+    puts "1. Input students"
+    puts "2. Show students"
+    puts "9. Exit"
+    selection = gets.chomp
+    case selection
+      when "1"
+        students = input_students
+      when "2" then
+        print_header
+        print(students)
+        print_footer(students)
+      when "9" then
+        exit
+      else
+        puts "I don't know what you meant, try again"
+    end
+  end
 end
+
+# nothing happens until we call the interactive menu method
+interactive_menu
