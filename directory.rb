@@ -32,7 +32,7 @@ def input_students
   # while name is not empty repeat this code
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
-    record = {name: "", age: "", height: "", home_town: "", country: "",
+    record = {name: "", age: "", height: "", home_town: "", country_of_birth: "",
               gov_dept: "", requirements: "", hobbies: "", cohort: ""}
     record.each do |key, val|
       if key == :name
@@ -93,12 +93,17 @@ def print_students
 end
 
 def print_footer
-  puts "Overall, we have #{@students.count} great students".center(160)
+  if @students.count == 1
+    puts "Overall, we have #{@students.count} great student".center(160)
+  else
+    puts "Overall, we have #{@students.count} great students".center(160)
+  end
 end
 
 def print_menu
   puts "1. Input students"
   puts "2. Show students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit"
 end
 
@@ -108,14 +113,30 @@ def show_students
   print_footer
 end
 
+def save_students
+  file = File.open("students.csv", "w")
+  @students.each do |student|
+    student_data = [student[:name], student[:age], student[:height], 
+                    student[:home_town], student[:country_of_birth], 
+                    student[:gov_dept], student[:requirements], 
+                    student[:hobbies], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
+end
+
 def process(selection)
   case selection
     when "1" then input_students
     when "2" then show_students
+    when "3" then save_students
     when "9" then exit
     else puts "I don't know what you meant, try again"
   end
 end
+
+
 
 def interactive_menu
   loop do
