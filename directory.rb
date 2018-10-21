@@ -9,19 +9,16 @@ def cohort_validation(month)
     puts "Please enter a valid month"
     month = gets.delete!("\n").capitalize
   end
-  month = "TBC" if month.empty?
   month.to_sym
 end
 
 # This method provides a default value of "TBC" if a blank string is entered
-def default(input)
-  input.map! do |hash|
-    hash.each do |key, val|
-      if hash[key] == :""
-        hash[key] = :TBC
-      elsif hash[key].empty?
-        hash[key] = "TBC"
-      end
+def default(hash)
+  hash.each do |key, val|
+    if hash[key] == :""
+      hash[key] = :TBC
+    elsif hash[key].empty?
+      hash[key] = "TBC"
     end
   end
 end
@@ -35,38 +32,25 @@ def input_students
   # while name is not empty repeat this code
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
-    puts "Please enter the cohort month"
-    cohort = gets.delete!("\n").capitalize
-    cohort = cohort_validation(cohort)
-    puts "Please enter thier age"
-    age = gets.delete!("\n")
-    puts "Please enter height in metres"
-    height = gets.delete!("\n")
-    puts "Please enter thier home town"
-    town = gets.delete!("\n").capitalize
-    puts "Please enter thier country of birth"
-    country = gets.delete!("\n").capitalize
-    puts "Please enter which Government department they are from"
-    dept = gets.delete!("\n").capitalize
-    puts "Please enter any specialist requirements they have"
-    requirements = gets.delete!("\n").capitalize
-    puts "Please enter any hobbies they have"
-    hobbies = gets.delete!("\n").capitalize
-    
-    # add the student details to the hash array
-    @students << {name: name, age: age, height: height, home_town: town,
-                 country_of_birth: country, gov_dept: dept,
-                 requirements: requirements, hobbies: hobbies, cohort: cohort}
-    # catches any empty values and assigns "TBC" as the default value
-    default(@students)
-    # Ensures the sentence reads correctly with student count
-    if @students.count == 1
-      puts "We now have #{@students.count} student"
-    else
-      puts "We now have #{@students.count} students"
+    record = {name: "", age: "", height: "", home_town: "", country: "",
+              gov_dept: "", requirements: "", hobbies: "", cohort: ""}
+    record.each do |key, val|
+      if key == :name
+        record[:name] = name
+      elsif key
+        puts "Please enter #{key.to_s.gsub("_", " ")}"
+        record[key] = gets.chomp.capitalize
+        record[key] = cohort_validation(record[key]) if key == :cohort
+      end
     end
+    # Assign "TBC" as a default value if value is empty
+    default(record)
+    # Add record to the global students array
+    @students << record
+    message = "We now have #{@students.count}"
+    puts @students.count == 1 ? "#{message} student" : "#{message} students"
     # get another name from the user
-    name = gets.delete!("\n").capitalize
+    name = gets.chomp.capitalize
   end
 end
 
