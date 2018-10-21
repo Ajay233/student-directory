@@ -7,7 +7,7 @@ def cohort_validation(month)
             "December", ""]
   until checks.include?(month) == true
     puts "Please enter a valid month"
-    month = gets.delete!("\n").capitalize
+    month = STDIN.gets.delete!("\n").capitalize
   end
   month.to_sym
 end
@@ -28,7 +28,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # get the first name
-  name = gets.delete!("\n").capitalize
+  name = STDIN.gets.delete!("\n").capitalize
   # while name is not empty repeat this code
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
@@ -39,7 +39,7 @@ def input_students
         record[:name] = name
       elsif key
         puts "Please enter #{key.to_s.gsub("_", " ")}"
-        record[key] = gets.chomp.capitalize
+        record[key] = STDIN.gets.chomp.capitalize
         record[key] = cohort_validation(record[key]) if key == :cohort
       end
     end
@@ -50,7 +50,7 @@ def input_students
     message = "We now have #{@students.count}"
     puts @students.count == 1 ? "#{message} student" : "#{message} students"
     # get another name from the user
-    name = gets.chomp.capitalize
+    name = STDIN.gets.chomp.capitalize
   end
 end
 
@@ -127,8 +127,8 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, age, height, town, country, dept, req, hob, cohort = line.chomp.split(",")
     @students << {name: name, age: age, height: height, home_town: town, 
@@ -137,6 +137,18 @@ def load_students
   end
   file.close
 end  
+
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} records from #{filename}"
+  else
+    puts "Sorry #{filename} does not exist"
+    exit
+  end  
+end
 
 def process(selection)
   case selection
@@ -154,9 +166,10 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
+try_load_students
 # nothing happens until we call the interactive menu method
 interactive_menu
