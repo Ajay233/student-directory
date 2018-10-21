@@ -104,6 +104,7 @@ def print_menu
   puts "1. Input students"
   puts "2. Show students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the students.csv list"
   puts "9. Exit"
 end
 
@@ -126,11 +127,23 @@ def save_students
   file.close
 end
 
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, age, height, town, country, dept, req, hob, cohort = line.chomp.split(",")
+    @students << {name: name, age: age, height: height, home_town: town, 
+                  country_of_birth: country, gov_dept: dept, requirements: req, 
+                  hobbies: hob, cohort: cohort.to_sym}
+  end
+  file.close
+end  
+
 def process(selection)
   case selection
     when "1" then input_students
     when "2" then show_students
     when "3" then save_students
+    when "4" then load_students  
     when "9" then exit
     else puts "I don't know what you meant, try again"
   end
