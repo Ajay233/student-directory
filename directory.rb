@@ -9,18 +9,31 @@ def cohort_validation(month)
     puts "Please enter a valid month"
     month = STDIN.gets.delete!("\n").capitalize
   end
-  month.to_sym
+  month
 end
 
 # This method provides a default value of "TBC" if a blank string is entered
-def default(hash)
-  hash.each do |key, val|
-    if hash[key] == :""
-      hash[key] = :TBC
-    elsif hash[key].empty?
-      hash[key] = "TBC"
+def default
+  @students.each do |hash|
+    hash.each do |key, val|
+      if hash[key] == :""
+        hash[key] = :TBC
+      elsif hash[key].empty?
+        hash[key] = "TBC"
+      end
     end
   end
+end
+
+def cohort_list
+  cohorts = []
+  @students.each { |hash| cohorts << hash[:cohort] }
+  cohorts.uniq!
+  cohorts
+end
+
+def add_record(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 # Put all the students into an array
@@ -32,26 +45,19 @@ def input_students
   # while name is not empty repeat this code
   while !name.empty?
   # Get details of age, height, town, country, department, requirements etc
-    record = {name: "", age: "", height: "", home_town: "", country_of_birth: "",
-              gov_dept: "", requirements: "", hobbies: "", cohort: ""}
-    record.each do |key, val|
-      if key == :name
-        record[:name] = name
-      elsif key
-        puts "Please enter #{key.to_s.gsub("_", " ")}"
-        record[key] = STDIN.gets.chomp.capitalize
-        record[key] = cohort_validation(record[key]) if key == :cohort
-      end
-    end
-    # Assign "TBC" as a default value if value is empty
-    default(record)
+    puts "Please enter the cohort"
+    cohort = STDIN.gets.delete!("\n").capitalize
+    cohort = cohort_validation(cohort)
     # Add record to the global students array
-    @students << record
+    add_record(name, cohort)
+    # Display the current number of records
     message = "We now have #{@students.count}"
     puts @students.count == 1 ? "#{message} student" : "#{message} students"
     # get another name from the user
     name = STDIN.gets.chomp.capitalize
   end
+# Assign "TBC" as a default value if any values are empty
+  default
 end
 
 # and then print them
@@ -62,33 +68,21 @@ end
 
 def print_students
   # Create a list of all cohorts that have been entered
-  cohorts = []
-  @students.each { |hash| cohorts << hash[:cohort] }
-  cohorts.uniq!
-  x = 0
+  cohorts = cohort_list
   # Iterates through each cohort month in the cohorts array
-  while x < cohorts.length
-    puts "The #{cohorts[x]} cohort\n".center(160)
-    i = 0
-    # "Each" changed to an until loop
-    until i >= @students.length
-    # Now prints a number before the name of each student
-      # Now only prints names beginning with "D" & containing less than 12 letters
-      if @students[i][:name].start_with?("D") && @students[i][:name].length < 12 && cohorts[x] == @students[i][:cohort]
-        puts "#{i + 1}.Name: #{@students[i][:name]} (#{@students[i][:cohort]} cohort)".center(160)
-        puts "Age: #{@students[i][:age]}".center(160)
-        puts "Height: #{@students[i][:height]} m".center(160)
-        puts "Home Town: #{@students[i][:home_town]}".center(160)
-        puts "Birth Country: #{@students[i][:country_of_birth]}".center(160)
-        puts "Government Department: #{@students[i][:gov_dept]}".center(160)
-        puts "Special Requirements: #{@students[i][:requirements]}".center(160)
-        puts "Hobbies: #{@students[i][:hobbies]}".center(160)
-        puts
+  cohorts.each do |cohort| 
+    puts "The #{cohort} cohort\n".center(160)
+    @students.each_with_index do |record, index|
+    # Now only prints names beginning with "D" & containing less than 12 letters
+      if record[:name].start_with?("D") && record[:name].length < 12
+        # Print the records that match the current cohort iteration
+        if cohort == record[:cohort]
+          puts "#{index + 1}.Name: #{record[:name]} (#{record[:cohort]} cohort)".center(160)
+          puts
+        end
       end
-    i += 1  
     end
   puts "-------------------------------".center(160)
-  x += 1
   end
 end
 
@@ -103,8 +97,8 @@ end
 def print_menu
   puts "1. Input students"
   puts "2. Show students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the students.csv list"
+  puts "3. Save list to students.csv"
+  puts "4. Load students.csv"
   puts "9. Exit"
 end
 
@@ -117,10 +111,7 @@ end
 def save_students
   file = File.open("students.csv", "w")
   @students.each do |student|
-    student_data = [student[:name], student[:age], student[:height], 
-                    student[:home_town], student[:country_of_birth], 
-                    student[:gov_dept], student[:requirements], 
-                    student[:hobbies], student[:cohort]]
+    student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
@@ -130,10 +121,8 @@ end
 def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
-    name, age, height, town, country, dept, req, hob, cohort = line.chomp.split(",")
-    @students << {name: name, age: age, height: height, home_town: town, 
-                  country_of_birth: country, gov_dept: dept, requirements: req, 
-                  hobbies: hob, cohort: cohort.to_sym}
+    name, cohort = line.chomp.split(",")
+    add_record(name, cohort)
   end
   file.close
 end  
@@ -160,8 +149,6 @@ def process(selection)
     else puts "I don't know what you meant, try again"
   end
 end
-
-
 
 def interactive_menu
   loop do
