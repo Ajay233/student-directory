@@ -112,23 +112,23 @@ def save_students
   puts "Please enter a (.csv) filename to save to (or the list will save to students.csv by default)"
   filename = STDIN.gets.chomp
   filename = "students.csv" if filename.empty?
-  file = File.open(filename, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
   puts "\nSuccessfully saved #{@students.count} records to #{filename}"
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    add_record(name, cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      add_record(name, cohort)
+    end
   end
-  file.close
   puts "\nLoaded #{@students.count} records from #{filename}"
 end  
 
