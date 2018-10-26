@@ -97,8 +97,8 @@ end
 def print_menu
   puts "1. Input students"
   puts "2. Show students"
-  puts "3. Save list to students.csv"
-  puts "4. Load students.csv"
+  puts "3. Save list to a (.csv) file"
+  puts "4. Load a (.csv) file"
   puts "9. Exit"
 end
 
@@ -109,7 +109,10 @@ def show_students
 end
 
 def save_students
-  file = File.open("students.csv", "w")
+  puts "Please enter a (.csv) filename to save to (or the list will save to students.csv by default)"
+  filename = STDIN.gets.chomp
+  filename = "students.csv" if filename.empty?
+  file = File.open(filename, "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
@@ -129,6 +132,11 @@ def load_students(filename = "students.csv")
   puts "\nLoaded #{@students.count} records from #{filename}"
 end  
 
+def manual_load
+  puts "Plese enter a (.csv) filename to load"
+  load_students(STDIN.gets.chomp) 
+end
+
 def try_load_students
   filename = ARGV.first
   filename = "students.csv" if filename.nil?
@@ -146,7 +154,7 @@ def process(selection)
     when "1" then input_students
     when "2" then show_students
     when "3" then save_students
-    when "4" then load_students  
+    when "4" then manual_load
     when "9" then exit
     else puts "I don't know what you meant, try again"
   end
