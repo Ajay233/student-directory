@@ -139,6 +139,7 @@ def try_load_students
   end  
 end
 
+# The process selection was too long so I refactored usingf when and "then".
 def process(selection)
   case selection
     when "1" then input_students
