@@ -116,6 +116,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "\nSuccessfully saved #{@students.count} records to #{filename}"
 end
 
 def load_students(filename = "students.csv")
@@ -125,6 +126,7 @@ def load_students(filename = "students.csv")
     add_record(name, cohort)
   end
   file.close
+  puts "\nLoaded #{@students.count} records from #{filename}"
 end  
 
 def try_load_students
@@ -132,14 +134,13 @@ def try_load_students
   filename = "students.csv" if filename.nil?
   if File.exists?(filename)
     load_students(filename)
-    puts "\nLoaded #{@students.count} records from #{filename}"
   else
     puts "Sorry #{filename} does not exist"
     exit
   end  
 end
 
-# The process selection was too long so I refactored usingf when and "then".
+# The process selection was too long so I refactored using when and "then".
 def process(selection)
   case selection
     when "1" then input_students
