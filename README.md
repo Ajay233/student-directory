@@ -9,11 +9,11 @@ at Villains Academy.
 When the student dirctory app is loaded the ``` shell "students.csv" ``` is 
 automatically loaded by default.  
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/default_load.png?raw=true "Student Directory Main Menu")
+![Alt text](/Projects/student-directory/screenshots/default_load.png?raw=true "Student Directory Main Menu")
 
 The app has a main menu system that provides the user with the folowing options:
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/main_menu.png?raw=true "Student Directory Main Menu")
+![Alt text](/Projects/student-directory/screenshots/main_menu.png?raw=true "Student Directory Main Menu")
 
 1. Input Students
 The input students option provides the user with the option to add student records.
@@ -29,7 +29,7 @@ following functionality:
 
 Please see the screenshot below:
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/adding_a_record.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/adding_a_record.png?raw=true "Adding a record")
 
 
 2. Show Students 
@@ -43,14 +43,14 @@ the following functionality:
       length will be displayed as per the user requirements.
     - The total number of students on file is displayed at the bottom of the list.
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/show_record.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/show_record.png?raw=true "Adding a record")
 
 
 3. Save list to a (.csv) file
 The user can save the records to a csv file by using option 3.  The user will be 
 prompeted to enter a (.csv) file as below.
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/saving.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/saving.png?raw=true "Adding a record")
 
 The user can save the records to the default file ``` shell "students.csv" ``` by
 simply pressing enter without entering as filename.
@@ -62,7 +62,7 @@ the user also has the option to load more records via this option.  As with the
 save option, the user will be prompted to enter a (.csv) filename e.g. 
 ``` shell "students.csv" ``` 
 
-![Alt text](/Projects/screenshots/student-directory-screenshots/loading.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/loading.png?raw=true "Adding a record")
 
 Once the file has been loaded a message will be displayed confirming hwo many 
 records were loaded from the file.
