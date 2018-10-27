@@ -6,7 +6,7 @@ at Villains Academy.
 
 ## Functionality currently includes ##
 
-When the student dirctory app is loaded the ``` shell "students.csv" ``` is 
+When the student dirctory app is loaded the ``` "students.csv" ``` is 
 automatically loaded by default.  
 
 ![Alt text](/Projects/student-directory/screenshots/default_load.png?raw=true "Student Directory Main Menu")
@@ -43,16 +43,16 @@ the following functionality:
       length will be displayed as per the user requirements.
     - The total number of students on file is displayed at the bottom of the list.
 
-![Alt text](/Projects/student-directory/screenshots/show_record.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/show_record.png?raw=true)
 
 
 3. Save list to a (.csv) file
 The user can save the records to a csv file by using option 3.  The user will be 
 prompeted to enter a (.csv) file as below.
 
-![Alt text](/Projects/student-directory/screenshots/saving.png?raw=true "Adding a record")
+![Alt text](/Projects/student-directory/screenshots/saving.png?raw=true)
 
-The user can save the records to the default file ``` shell "students.csv" ``` by
+The user can save the records to the default file ``` "students.csv" ``` by
 simply pressing enter without entering as filename.
 
 
@@ -60,7 +60,7 @@ simply pressing enter without entering as filename.
 The "student.csv" is the default record that will load when the app is loaded; however
 the user also has the option to load more records via this option.  As with the 
 save option, the user will be prompted to enter a (.csv) filename e.g. 
-``` shell "students.csv" ``` 
+``` "students.csv" ``` 
 
 ![Alt text](/Projects/student-directory/screenshots/loading.png?raw=true "Adding a record")
 
@@ -80,5 +80,5 @@ ruby directory.rb
 Alternatively you can also run the app and load a csv file of your choice on startup
 e.g.
 ``` shell
-ruby directory.rb students.csv
+ruby directory.rb  students.csv
 ```
