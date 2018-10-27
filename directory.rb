@@ -1,3 +1,5 @@
+require "csv"
+
 @students = []
 
 # This method makes sure either a valid month or blank string is entered
@@ -112,22 +114,18 @@ def save_students
   puts "Please enter a (.csv) filename to save to (or the list will save to students.csv by default)"
   filename = STDIN.gets.chomp
   filename = "students.csv" if filename.empty?
-  File.open(filename, "w") do |file|
+  CSV.open(filename, "w") do |csv|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
     end
   end
   puts "\nSuccessfully saved #{@students.count} records to #{filename}"
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(",")
-      add_record(name, cohort)
-    end
+  CSV.foreach(filename, "r") do |row|
+    record = row
+    add_record(record[0], record[1])
   end
   puts "\nLoaded #{@students.count} records from #{filename}"
 end  
