@@ -9,11 +9,11 @@ at Villains Academy.
 When the student dirctory app is loaded the ``` "students.csv" ``` is 
 automatically loaded by default.  
 
-![Alt text](/Projects/student-directory/screenshots/default_load.png?raw=true "Student Directory Main Menu")
+![Alt text](/Projects/student-directory/screenshots/default_load.png?raw=true)
 
 The app has a main menu system that provides the user with the folowing options:
 
-![Alt text](/Projects/student-directory/screenshots/main_menu.png?raw=true "Student Directory Main Menu")
+![Alt text](/Projects/student-directory/screenshots/main_menu.png?raw=true)
 
 1. Input Students
 The input students option provides the user with the option to add student records.
